@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gowshika — Web Developer</title>
+  <meta name="description" content="Portfolio website of Gowshika K — Web Developer and B.Sc AI & DS student." />
+  <style>
+    :root {
+      --bg: #111827;
+      --card: #1f2937;
+      --muted: #9ca3af;
+      --accent: #25ebc7;
+    }
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      background: linear-gradient(180deg,#0f172a,#111827);
+      color: #f9fafb;
+      line-height: 1.5;
+      overflow-x: hidden;
+      position: relative;
+    }
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(17,24,39,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      z-index: 1000;
+    }
+    .brand { font-weight: 700; font-size: 18px; }
+    nav { display: flex; gap: 12px; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    nav a:hover { background: rgba(255,255,255,0.08); }
+    nav a.active {
+      background: var(--accent);
+      color: white !important;
+      font-weight: 600;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 120px 24px 60px;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+    h1, h2 { margin-top: 0; }
+    .card {
+      background: rgba(255,255,255,0.03);
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      text-align: left;
+    }
+    .role { color: var(--accent); font-weight: 600; margin-top: 6px; }
+    p.lead { color: var(--muted); margin-top: 12px; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .skill { padding: 8px 10px; border-radius: 10px; background: rgba(255,255,255,0.05); font-weight: 600; }
+
+    .projects { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 18px; }
+    .project { padding: 16px; border-radius: 12px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); min-height: 120px; }
+    .project h3 { margin: 0 0 8px 0; }
+    .project p { color: var(--muted); font-size: 14px; }
+
+    footer { margin-top: 24px; padding: 18px; text-align: center; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .projects { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 560px) { nav { display: none; } .projects { grid-template-columns: 1fr; } }
+
+    /* Glowing Profile */
+    .profile-ring {
+      width: 360px;   /* increased */
+      height: 360px;  /* increased */
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 24px auto 40px auto;
+      z-index: 2;
+    }
+    .profile-ring::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      background: conic-gradient(#00c3ff, #3a19a0, #39c6d0, #00c3ff);
+      filter: blur(18px);
+      z-index: 0;
+      animation: spin 6s linear infinite;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .avatar {
+      width: 320px;   /* increased */
+      height: 320px;  /* increased */
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      border: 6px solid rgba(255,255,255,0.2);
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Golden Bubbles */
+    .bubbles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bubble {
+      position: absolute;
+      bottom: -150px;
+      background: radial-gradient(circle, #f700ff 30%, #f700ff 60%, #f700ff 100%);
+      border-radius: 50%;
+      animation: rise linear forwards;
+      box-shadow: 0 0 12px rgba(247, 0, 255, 0.8), 0 0 24px rgba(247, 3, 247, 0.6);
+    }
+    @keyframes rise {
+      0%   { transform: translateY(0) scale(0.4); opacity: 0.7; }
+      50%  { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Golden Bubbles -->
+  <div class="bubbles"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">Gowshika K</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <!-- Profile first & center -->
+    <div class="profile-ring">
+      <div class="avatar">
+        <img src="assets/g4.jpeg" alt="Gowshika">
+      </div>
+    </div>
+
+    <!-- Card after profile -->
+    <div class="card">
+      <h1>Hello, I'm <span style="color:var(--accent)">Gowshika</span></h1>
+      <div class="role">Web Developer · 2nd Year · AI & DS</div>
+      <p class="lead">Student at <strong>RD National College of Arts and Science, Erode</strong>. Passionate about frontend & backend web development, responsive design, and databases.</p>
+      <div class="about-grid">
+        <div>
+          <div class="meta">Department</div>
+          <div>B.Sc Artificial Intelligence & Data Science</div>
+          <div style="margin-top:12px" class="meta">Year</div>
+          <div>2nd Year (2024–2027)</div>
+        </div>
+        <div>
+          <div class="meta">Skills</div>
+          <div class="skills">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">PHP</span>
+            <span class="skill">MySQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>Portfolio Website</h3>
+        <p>Responsive personal portfolio built with HTML, CSS, and JavaScript.</p>
+      </article>
+      <article class="project">
+        <h3>neural engin</h3>
+        <p>audio aploder,two line gtaph,star rating ect...</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="card">
+      <h2>Contact Me</h2>
+      <p class="meta">Email: gowshika@example.com<br>Phone: +91-9876543210</p>
+    </div>
+  </section>
+
+  <footer>
+    Built with ❤️ — Gowshika · Web Developer
+  </footer>
+
+  <script>
+    // Nav highlight
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach(link => {
+      link.addEventListener("click", function() {
+        navLinks.forEach(l => l.classList.remove("active"));
+        this.classList.add("active");
+      });
+    });
+
+    // Generate random golden bubbles
+    const bubblesContainer = document.querySelector('.bubbles');
+    function createBubble() {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 40 + 10; // 10px – 50px
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      const duration = Math.random() * 5 + 5; // 5s – 10s
+      bubble.style.animationDuration = `${duration}s`;
+      bubblesContainer.appendChild(bubble);
+      setTimeout(() => { bubble.remove(); }, duration * 1000);
+    }
+    setInterval(createBubble, 500); // every 0.5s new bubble
+  </script>
+</body>
+</html>
